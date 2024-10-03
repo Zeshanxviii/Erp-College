@@ -19,7 +19,9 @@ app.use("/api/faculty", facultyRoutes);
 app.use("/api/student", studentRoutes);
 
 const PORT = process.env.PORT || 5001;
-app.get("/", handler, (req, res) => {
+
+app.get("/", handler); 
+app.get("/", (req, res) => {
   res.send("Hello to college erp API");
 });
 mongoose

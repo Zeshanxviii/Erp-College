@@ -3,7 +3,7 @@ import bodyParser from "body-parser";
 import mongoose from "mongoose";
 import cors from "cors";
 import dotenv from "dotenv";
-
+import handler from "./corshandler.js";
 import adminRoutes from "./routes/adminRoutes.js";
 import studentRoutes from "./routes/studentRoutes.js";
 import facultyRoutes from "./routes/facultyRoutes.js";
@@ -19,7 +19,7 @@ app.use("/api/faculty", facultyRoutes);
 app.use("/api/student", studentRoutes);
 
 const PORT = process.env.PORT || 5001;
-app.get("/", (req, res) => {
+app.get("/", handler, (req, res) => {
   res.send("Hello to college erp API");
 });
 mongoose

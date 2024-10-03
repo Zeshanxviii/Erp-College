@@ -9,6 +9,8 @@ import studentRoutes from "./routes/studentRoutes.js";
 import facultyRoutes from "./routes/facultyRoutes.js";
 import { addDummyAdmin } from "./controller/adminController.js";
 const app = express();
+app.options('*', cors());
+
 app.use(cors({
   origin: 'https://collegeerpfrontend.vercel.app', // Add your frontend URL here
   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',

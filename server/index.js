@@ -9,7 +9,11 @@ import studentRoutes from "./routes/studentRoutes.js";
 import facultyRoutes from "./routes/facultyRoutes.js";
 import { addDummyAdmin } from "./controller/adminController.js";
 const app = express();
-app.use(cors( ));
+app.use(cors({
+  origin: 'https://collegeerpfrontend.vercel.app', // Add your frontend URL here
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  credentials: true, // If you're using credentials (cookies, authentication headers)
+}));
 dotenv.config();
 app.use(bodyParser.json({ limit: "30mb", extended: true }));
 app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
@@ -20,7 +24,7 @@ app.use("/api/student", studentRoutes);
 
 const PORT = process.env.PORT || 5001;
 
-app.get("/", handler); 
+// app.get("/", handler); 
 app.get("/", (req, res) => {
   res.send("Hello to college erp API");
 });

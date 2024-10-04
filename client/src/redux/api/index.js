@@ -1,8 +1,11 @@
 import axios from "axios";
 
-// const API = axios.create({ baseURL: process.env.REACT_APP_SERVER_URL });
-const API = axios.create({ baseURL: "https://college-erp-jishans-projects-80682501.vercel.app/"
- });
+const API = axios.create({
+  baseURL: "https://college-erp-jishans-projects-80682501.vercel.app/",
+  headers: {
+    "Access-Control-Allow-Origin": "*",
+  },
+});
 
 API.interceptors.request.use((req) => {
   if (localStorage.getItem("user")) {
@@ -101,3 +104,4 @@ export const getTestResult = (testResult) =>
   API.post("/api/student/testresult", testResult);
 export const getAttendance = (attendance) =>
   API.post("/api/student/attendance", attendance);
+

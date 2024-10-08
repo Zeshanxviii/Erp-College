@@ -1,5 +1,6 @@
 import React from 'react';
 import StudentLogin from '../login/student';
+import FacultyLogin from '../login/facultylogin';
 function LandingPage() {
   return (
     // 
@@ -29,9 +30,7 @@ const HalfWindow = () => {
       </div>
       <div className="flex-1 p-8 bg-white">
       <div className="container mx-auto flex justify-center min-h-screen">
-          <header className="mt-40">
-            <StudentLogin/>
-          </header>
+          <FacultyLogin/>
         </div>
       </div>
     </div>

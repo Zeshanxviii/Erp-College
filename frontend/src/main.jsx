@@ -3,14 +3,18 @@ import { createRoot } from 'react-dom/client'
 import App from './App.jsx'
 import './index.css'
 import { BrowserRouter } from 'react-router-dom'
-import { MainProvider } from './context/index.jsx'
+import { Provider } from 'react-redux'
+import reducers from "./redux/reducers";
+
+
+const store = createStore(reducers, compose(applyMiddleware(thunk)));
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <BrowserRouter>
-      <MainProvider>
+    <Provider store={store}>
+      <BrowserRouter>
         <App />
-      </MainProvider>
-    </BrowserRouter>
+      </BrowserRouter>
+    </Provider>
   </StrictMode>,
 )

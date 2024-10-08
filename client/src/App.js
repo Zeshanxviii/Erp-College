@@ -46,7 +46,7 @@ import CreateNotice from "./components/admin/createNotice/CreateNotice";
 const App = () => {
   return (
     <Routes>
-      <Route exact path="/" element={<Login />} />
+      <Route  path="/" element={<Login />} />
 
       {/* Admin  */}
 

@@ -1,32 +1,45 @@
-// import React, { useEffect, useState } from "react";
-// import { useNavigate } from "react-router";
-// import { useDispatch, useSelector } from "react-redux";
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router";
 // import VisibilityIcon from "@mui/icons-material/Visibility";
 // import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 // import Spinner from "../../../utils/Spinner";
-// import { studentSignIn } from "../../../redux/actions/studentActions";
+import { useStudent } from "../../context/index"; // Import the useStudent hook
+
 const StudentLogin = () => {
-    // const [translate, setTranslate] = useState(false);
-    // const [username, setUsername] = useState("");
-    // const [password, setPassword] = useState("");
-    // const [showPassword, setShowPassword] = useState(false);
-    // const [loading, setLoading] = useState(false);
-    // const dispatch = useDispatch();
-    // const navigate = useNavigate();
-    // const store = useSelector((state) => state);
+    const [translate, setTranslate] = useState(false);
+    const [username, setUsername] = useState("");
+    const [password, setPassword] = useState("");
+    const [showPassword, setShowPassword] = useState(false);
+    const [loading, setLoading] = useState(false);
+    const navigate = useNavigate();
+    const { state, studentSignIn } = useStudent(); // Access the state and studentSignIn from the context
+    const [error, setError] = useState({});
 
-    // const [error, setError] = useState({});
-    // useEffect(() => {
-    //     setTimeout(() => {
-    //         setTranslate(true);
-    //     }, 1000);
-    // }, []);
+    useEffect(() => {
+        setTimeout(() => {
+            setTranslate(true);
+        }, 1000);
+    }, []);
 
+    useEffect(() => {
+        if (state.errors) {
+            setError(state.errors);
+        }
+    }, [state.errors]);
 
-    // const login = (e) => {
-    //     e.preventDefault();
-    //     setLoading(true);
-    // };
+    const login = (e) => {
+        e.preventDefault();
+        setLoading(true);
+        studentSignIn({ username, password }, navigate);
+    };
+
+    useEffect(() => {
+        if (state.errors) {
+            setLoading(false);
+            setUsername("");
+            setPassword("");
+        }
+    }, [state.errors]);
 
     return (
         <div className="bg-[#d65158] h-screen w-screen flex items-center justify-center">
@@ -34,7 +47,7 @@ const StudentLogin = () => {
                 <div
                     className={`h-96 w-96 bg-white flex items-center justify-center ${translate ? "translate-x-[12rem]" : ""
                         }  duration-1000 transition-all rounded-3xl shadow-2xl`}>
-                    <h1 className="text-[3rem]  font-bold text-center">
+                    <h1 className="text-[3rem] font-bold text-center">
                         Student
                         <br />
                         Login
@@ -70,17 +83,18 @@ const StudentLogin = () => {
                                 className=" bg-[#515966] text-white rounded-lg outline-none py-2  placeholder:text-sm"
                                 placeholder="Password"
                             />
-                            {showPassword ? (
-                                <VisibilityIcon
-                                    onClick={() => setShowPassword(!showPassword)}
-                                    className="cursor-pointer"
-                                />
+                            {/* {showPassword ? (
+                                 <VisibilityIcon
+                                     onClick={() => setShowPassword(!showPassword)}
+                                     className="cursor-pointer"
+                                 />
                             ) : (
-                                <VisibilityOffIcon
+                                 <VisibilityOffIcon
                                     onClick={() => setShowPassword(!showPassword)}
-                                    className="cursor-pointer"
-                                />
-                            )}
+                                     className="cursor-pointer"
+                                 />
+                            )
+                            } */}
                         </div>
                     </div>
                     <button

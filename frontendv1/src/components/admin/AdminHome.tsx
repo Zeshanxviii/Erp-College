@@ -6,7 +6,7 @@ import { useEffect } from "react";
 //   getAllDepartment,
 //   getNotice,
 // } from "../../redux/actions/adminActions";
-import useAdminStore from "../../store/Actions/admin";
+import useAdminStore from "../../store/Actions/adminActions";
 import Body from "./Body";
 import Header from "./Header";
 import Sidebar from "./Sidebar";

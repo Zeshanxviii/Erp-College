@@ -2,7 +2,7 @@ import React from "react";
 import { Avatar } from "@mui/material";
 import LogoutIcon from "@mui/icons-material/Logout";
 import { useNavigate } from "react-router-dom";
-import useAdminStore from "../../store/Actions/admin"; // Adjust the import path
+import useAdminStore from "../../store/Actions/adminActions"; // Adjust the import path
 
 const Header: React.FC = () => {
   const { authData, logout } = useAdminStore(); // Get authData and logout from the store

@@ -9,12 +9,6 @@ import facultyRoutes from "./routes/facultyRoutes.js";
 import { addDummyAdmin } from "./controller/adminController.js";
 const app = express();
 app.options('*', cors());
-
-app.use(cors({
-  origin: 'https://collegeerpfrontend.vercel.app', // Add your frontend URL here
-  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-  credentials: true, // If you're using credentials (cookies, authentication headers)
-}));
 dotenv.config();
 app.use(bodyParser.json({ limit: "30mb", extended: true }));
 app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));

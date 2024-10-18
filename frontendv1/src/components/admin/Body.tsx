@@ -10,7 +10,7 @@ import MenuBookIcon from "@mui/icons-material/MenuBook";
 // import Notice from "../notices/Notice";   temporary
 // import ShowNotice from "../notices/ShowNotice"; temperary
 import ReplyIcon from "@mui/icons-material/Reply";
-import useAdminStore from "../../store/Actions/admin";
+import useAdminStore from "../../store/Actions/adminActions";
 const Body = () => {
 
   const {

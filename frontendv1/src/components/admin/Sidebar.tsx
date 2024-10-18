@@ -8,7 +8,7 @@ import BoyIcon from "@mui/icons-material/Boy";
 import DeleteIcon from "@mui/icons-material/Delete";
 import MenuBookIcon from "@mui/icons-material/MenuBook";
 import { jwtDecode } from "jwt-decode";
-import useAdminStore from "../../store/Actions/admin";
+import useAdminStore from "../../store/Actions/adminActions";
 
 const isNotActiveStyle =
   "flex items-center px-5 gap-3 text-gray-500 hover:text-black transition-all duration-200 ease-in-out capitalize hover:bg-gray-200 py-2 my-1";

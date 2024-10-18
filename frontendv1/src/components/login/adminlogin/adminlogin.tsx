@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
-import useAdminStore from "../../../store/Actions/admin";
+import useAdminStore from "../../../store/Actions/adminActions";
 import useErrorStore from "../../../store/Actions/useErrorStore";
 
 const AdminLogin = () => {

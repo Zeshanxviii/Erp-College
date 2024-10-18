@@ -1,55 +1,55 @@
 import {
-    ADD_TEST,
-    ATTENDANCE_MARKED,
-    FACULTY_LOGIN,
-    GET_TEST,
     LOGOUT,
-    MARKS_UPLOADED,
-    UPDATE_FACULTY,
+    STUDENT_LOGIN,
+    UPDATE_STUDENT,
     UPDATE_PASSWORD,
+    TEST_RESULT,
+    ATTENDANCE,
 } from "../Actions/actionTypes";
 
 // Define the shape of the state
-interface FacultyState {
-    authData: any | null;  // Replace 'any' with the actual type if known
+interface StudentState {
+    authData: any | null; // Replace 'any' with a specific type if known
     updatedPassword: boolean;
-    updatedFaculty: boolean;
+    updatedStudent: boolean;
     testAdded: boolean;
     marksUploaded: boolean;
     attendanceUploaded: boolean;
-    tests: any[];  // You can define a specific type for tests if known
+    testResult: any[]; // Define a specific type if known
+    tests: any[]; // Define a specific type if known
+    attendance: any[]; // Define a specific type if known
 }
 
 // Define the action type
-interface FacultyAction {
+interface StudentAction {
     type:
-    | typeof FACULTY_LOGIN
+    | typeof STUDENT_LOGIN
     | typeof LOGOUT
     | typeof UPDATE_PASSWORD
-    | typeof UPDATE_FACULTY
-    | typeof ADD_TEST
-    | typeof GET_TEST
-    | typeof MARKS_UPLOADED
-    | typeof ATTENDANCE_MARKED;
-    payload?: any;  // Specify payload types if possible
-    data?: any;  // Specify data types if possible
+    | typeof UPDATE_STUDENT
+    | typeof TEST_RESULT
+    | typeof ATTENDANCE;
+    payload?: any; // Specify payload types if possible
+    data?: any; // Specify data types if possible
 }
 
 // Initial state
-const initialState: FacultyState = {
+const initialState: StudentState = {
     authData: null,
     updatedPassword: false,
-    updatedFaculty: false,
+    updatedStudent: false,
     testAdded: false,
     marksUploaded: false,
     attendanceUploaded: false,
+    testResult: [],
     tests: [],
+    attendance: [],
 };
 
-// Faculty reducer
-const facultyReducer = (state: FacultyState = initialState, action: FacultyAction): FacultyState => {
+// Student reducer
+const studentReducer = (state: StudentState = initialState, action: StudentAction): StudentState => {
     switch (action.type) {
-        case FACULTY_LOGIN:
+        case STUDENT_LOGIN:
             localStorage.setItem("user", JSON.stringify({ ...action.data }));
             return { ...state, authData: action.data };
         case LOGOUT:
@@ -60,34 +60,24 @@ const facultyReducer = (state: FacultyState = initialState, action: FacultyActio
                 ...state,
                 updatedPassword: action.payload,
             };
-        case UPDATE_FACULTY:
+        case UPDATE_STUDENT:
             return {
                 ...state,
-                updatedFaculty: action.payload,
+                updatedStudent: action.payload,
             };
-        case ADD_TEST:
+        case TEST_RESULT:
             return {
                 ...state,
-                testAdded: action.payload,
+                testResult: action.payload,
             };
-        case GET_TEST:
+        case ATTENDANCE:
             return {
                 ...state,
-                tests: action.payload,
-            };
-        case MARKS_UPLOADED:
-            return {
-                ...state,
-                marksUploaded: action.payload,
-            };
-        case ATTENDANCE_MARKED:
-            return {
-                ...state,
-                attendanceUploaded: action.payload,
+                attendance: action.payload,
             };
         default:
             return state;
     }
 };
 
-export default facultyReducer;
+export default studentReducer;

@@ -10,6 +10,10 @@ import adminRoutes from "./routes/adminRoutes.js";
 import studentRoutes from "./routes/studentRoutes.js";
 import facultyRoutes from "./routes/facultyRoutes.js";
 import { addDummyAdmin } from "./controller/adminController.js";
+import compression from 'compression';
+import mongoSanitize from 'express-mongo-sanitize';
+import xss from 'xss-clean';
+import winston from 'winston';
 
 // Load environment variables
 dotenv.config();
@@ -61,6 +65,9 @@ app.use(cors(corsOptions));
 app.options('*', cors(corsOptions));
 
 // Body parsing middleware with reasonable limits
+app.use(compression());
+app.use(xss());
+app.use(mongoSanitize());
 app.use(bodyParser.json({ limit: "10mb", extended: true }));
 app.use(bodyParser.urlencoded({ limit: "10mb", extended: true }));
 
@@ -81,6 +88,20 @@ app.get("/health", (req, res) => {
 app.use("/api/admin", adminRoutes);
 app.use("/api/faculty", facultyRoutes);
 app.use("/api/student", studentRoutes);
+
+
+
+// Winston Logger Setup
+  const logger = winston.createLogger({
+    level: 'info',
+    transports: [
+      new winston.transports.Console(),
+      new winston.transports.File({ filename: 'logs/error.log', level: 'error' })
+    ]
+  });
+  
+  logger.info('Server started');
+  logger.error('Something went wrong');
 
 // Root endpoint
 app.get("/", (req, res) => {

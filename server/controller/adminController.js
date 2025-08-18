@@ -31,12 +31,28 @@ export const adminLogin = async (req, res) => {
         id: existingAdmin._id,
       },
       process.env.JWT_SECRET_KEY,
-      { expiresIn: "1h" }
+      { expiresIn: "24h" } // Extended to 24 hours for better UX
     );
 
-    res.status(200).json({ result: existingAdmin, token: token });
+    // Update last login
+    existingAdmin.lastLogin = new Date();
+    await existingAdmin.save();
+
+    // Remove password from response
+    const adminResponse = existingAdmin.toObject();
+    delete adminResponse.password;
+
+    res.status(200).json({ 
+      result: adminResponse, 
+      token: token,
+      message: "Login successful"
+    });
   } catch (error) {
-    console.log(error);
+    console.error("Admin login error:", error);
+    res.status(500).json({
+      error: "Internal server error",
+      message: "Login failed due to server error"
+    });
   }
 };
 
@@ -163,6 +179,13 @@ export const addDummyAdmin = async () => {
   const password = "123";
   const name = "dummy";
   const username = "ADMDUMMY";
+  const department = "cse";
+  const dob= "2002-11-11";
+  const joiningYear = 2020;
+  const contactNumber = 7011406949;
+
+
+
   let hashedPassword;
   hashedPassword = await bcrypt.hash(password, 10);
   var passwordUpdated = true;
@@ -172,6 +195,10 @@ export const addDummyAdmin = async () => {
   if (!dummyAdmin) {
     await Admin.create({
       name,
+      department,
+      contactNumber,
+      joiningYear,
+      dob,
       email,
       password: hashedPassword,
       username,

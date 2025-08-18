@@ -1,5 +1,16 @@
 import express from "express";
 import auth from "../middleware/auth.js";
+import { 
+  validate, 
+  loginSchema, 
+  passwordUpdateSchema,
+  adminCreateSchema,
+  studentCreateSchema,
+  facultyCreateSchema,
+  departmentCreateSchema,
+  subjectCreateSchema,
+  noticeCreateSchema
+} from "../middleware/validation.js";
 import {
   adminLogin,
   updateAdmin,
@@ -26,27 +37,39 @@ import {
   createNotice,
   getNotice,
 } from "../controller/adminController.js";
+
 const router = express.Router();
 
-router.post("/login", adminLogin);
-router.post("/updatepassword", auth, updatedPassword);
+// Authentication routes
+router.post("/login", validate(loginSchema), adminLogin);
+router.post("/updatepassword", auth, validate(passwordUpdateSchema), updatedPassword);
+
+// Get all data routes (no validation needed for GET requests)
 router.get("/getallstudent", auth, getAllStudent);
-router.post("/createnotice", auth, createNotice);
 router.get("/getallfaculty", auth, getAllFaculty);
 router.get("/getalldepartment", auth, getAllDepartment);
 router.get("/getallsubject", auth, getAllSubject);
 router.get("/getalladmin", auth, getAllAdmin);
+
+// Profile management
 router.post("/updateprofile", auth, updateAdmin);
-router.post("/addadmin", auth, addAdmin);
-router.post("/adddepartment", auth, addDepartment);
-router.post("/addfaculty", auth, addFaculty);
+
+// Create operations with validation
+router.post("/addadmin", auth, validate(adminCreateSchema), addAdmin);
+router.post("/adddepartment", auth, validate(departmentCreateSchema), addDepartment);
+router.post("/addfaculty", auth, validate(facultyCreateSchema), addFaculty);
+router.post("/addsubject", auth, validate(subjectCreateSchema), addSubject);
+router.post("/addstudent", auth, validate(studentCreateSchema), addStudent);
+router.post("/createnotice", auth, validate(noticeCreateSchema), createNotice);
+
+// Get specific data routes
 router.post("/getfaculty", auth, getFaculty);
-router.post("/addsubject", auth, addSubject);
 router.post("/getsubject", auth, getSubject);
-router.post("/addstudent", auth, addStudent);
 router.post("/getstudent", auth, getStudent);
 router.post("/getnotice", auth, getNotice);
 router.post("/getadmin", auth, getAdmin);
+
+// Delete operations
 router.post("/deleteadmin", auth, deleteAdmin);
 router.post("/deletefaculty", auth, deleteFaculty);
 router.post("/deletestudent", auth, deleteStudent);

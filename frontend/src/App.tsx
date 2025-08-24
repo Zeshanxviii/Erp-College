@@ -1,22 +1,22 @@
-import { createBrowserRouter, createRoutesFromElements } from "react-router";
-import { Route } from "react-router";
-import RootLayout from "./RootLayout";
-import Home from "./pages/Home";
-import AdminLogin from "./pages/Login/adminLogin";
-import StudentLogin from "./pages/Login/studentLogin";
-import StaffLogin from "./pages/Login/staffLogin";
-import { RouterProvider } from "react-router";
+import { Routes, Route } from "react-router"
+import HomePage from './pages/HomePage'
+import AdminPortal from "./pages/Adminportal"
+import StaffPortal from "./pages/StaffPortal"
+import StudentPortal from "./pages/StudentPortal"
+import Navbar from "./pages/Navbar"
 
-export default function App() {
-  const router = createBrowserRouter(
-    createRoutesFromElements(
-      <Route path="/home" element={<RootLayout />}>
-        <Route index element={<Home />} />
-        <Route path="/admin" element={<AdminLogin />} />
-        <Route path="/student" element={<StudentLogin />} />
-        <Route path="/staff" element={<StaffLogin />} />
-      </Route>
-    )
-  );
-  return <RouterProvider router={router} />;
+function App() {
+  return (
+    <div>
+      <Navbar />
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/admin" element={<AdminPortal />} />
+        <Route path="/staff" element={<StaffPortal />} />
+        <Route path="/students" element={<StudentPortal />} />
+      </Routes>
+    </div>
+  )
 }
+
+export default App

@@ -11,10 +11,10 @@ const Navbar = () => {
             <span className="text-xl font-bold text-foreground font-montserrat">EduManage</span>
           </div>
           <div className="hidden md:flex items-center space-x-6">
-            <Link to="/home" className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors">
+            <Link to="/" className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors">
               Home
             </Link>
-            <Link to="/student" className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors">
+            <Link to="/students" className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors">
               Student Login
             </Link>
             <Link

@@ -126,13 +126,13 @@ export interface AdminLoginResponse {
   user: {
     id: string;
     username: string;
-    // Add other fields as needed
+    passwordUpdated: false
   };
 }
 
 // Base configuration
 const api = axios.create({
-  baseURL: import.meta.env.BASE_URL,
+  baseURL: import.meta.env.VITE_BASE_URL,
   timeout: 10000,
   headers: {
     'Content-Type': 'application/json',
@@ -167,16 +167,16 @@ api.interceptors.response.use(
 const apiService = {
   // Admin endpoints
 admin: {
-    login: (data: AdminLoginData) => api.post<AdminLoginResponse>('/admin/login', data),
-    logout: () => api.post<void>('/admin/logout'),
-    createDepartment: (data: DepartmentCreateData) => api.post<DepartmentResponse>('/admin/department', data),
-    createFaculty: (data: FacultyCreateData) => api.post<FacultyResponse>('/admin/faculty', data),
-    createStudent: (data: StudentCreateData) => api.post<StudentResponse>('/admin/student', data),
-    createSubject: (data: SubjectCreateData) => api.post<SubjectResponse>('/admin/subject', data),
-    getDepartments: () => api.get<DepartmentResponse[]>('/admin/departments'),
-    getFaculty: () => api.get<FacultyResponse[]>('/admin/faculty'),
-    getStudents: () => api.get<StudentResponse[]>('/admin/students'),
-    getSubjects: () => api.get<SubjectResponse[]>('/admin/subjects'),
+    login: (data: AdminLoginData) => api.post<AdminLoginResponse>('/api/admin/login', data),
+    logout: () => api.post<void>('/api/admin/logout'),
+    createDepartment: (data: DepartmentCreateData) => api.post<DepartmentResponse>('/api/admin/department', data),
+    createFaculty: (data: FacultyCreateData) => api.post<FacultyResponse>('/api/admin/faculty', data),
+    createStudent: (data: StudentCreateData) => api.post<StudentResponse>('/api/admin/student', data),
+    createSubject: (data: SubjectCreateData) => api.post<SubjectResponse>('/api/admin/subject', data),
+    getDepartments: () => api.get<DepartmentResponse[]>('/api/admin/departments'),
+    getFaculty: () => api.get<FacultyResponse[]>('/api/admin/faculty'),
+    getStudents: () => api.get<StudentResponse[]>('/api/admin/students'),
+    getSubjects: () => api.get<SubjectResponse[]>('/api/admin/subjects'),
     // Add more endpoints as needed
   },
 

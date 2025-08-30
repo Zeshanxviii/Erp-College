@@ -33,12 +33,12 @@ export function LoginForm({ userType }: LoginFormProps) {
       return
     }
 
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-    if (!emailRegex.test(email)) {
-      setError("Please enter a valid email address")
-      setIsLoading(false)
-      return
-    }
+    // const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+    // if (!emailRegex.test(email)) {
+    //   setError("Please enter a valid email address")
+    //   setIsLoading(false)
+    //   return
+    // }
 
     try {
       // Make API call based on user type
@@ -90,7 +90,7 @@ export function LoginForm({ userType }: LoginFormProps) {
         return "faculty@university.edu"
       case "admin":
         return "admin@university.edu"
-      default:
+      default:    
         return "your.email@university.edu"
     }
   }
@@ -111,7 +111,7 @@ export function LoginForm({ userType }: LoginFormProps) {
           <Mail className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
           <Input
             id="email"
-            type="email"
+            type="string"
             placeholder={getPlaceholderEmail()}
             value={email}
             onChange={(e) => setEmail(e.target.value)}

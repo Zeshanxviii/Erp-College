@@ -7,7 +7,7 @@ export default function AdminPortal() {
   return (
     <div className="min-h-screen bg-background">
       <header className="border-b bg-background/95 backdrop-blur">
-        <div className="container flex h-16 items-center justify-between">
+        <div className="mx-auto px-4 flex h-16 items-center justify-between">
           <div className="flex items-center space-x-4">
             <Link to="/" className="flex items-center space-x-2 text-muted-foreground hover:text-primary">
               <ArrowLeft className="h-4 w-4" />
@@ -21,7 +21,7 @@ export default function AdminPortal() {
         </div>
       </header>
 
-      <main className="container py-12">
+      <main className="mx-auto px-4 py-12">
         <div className="text-center mb-12">
           <h1 className="text-4xl font-bold mb-4 font-montserrat">Administrator Dashboard</h1>
           <p className="text-xl text-muted-foreground">Complete institutional oversight and management capabilities</p>

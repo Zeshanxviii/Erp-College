@@ -1,7 +1,6 @@
 import { create } from 'zustand';
 
 interface StudentState {
-  authData: any | null;
   profile: any | null;
   attendance: any[];
   subjects: any[];
@@ -11,8 +10,6 @@ interface StudentState {
 }
 
 interface StudentActions {
-  login: (data: any) => void;
-  logout: () => void;
   setProfile: (profile: any) => void;
   updateProfile: (updates: any) => void;
   fetchAttendance: () => Promise<void>;
@@ -23,7 +20,6 @@ interface StudentActions {
 
 const useStudentStore = create<StudentState & StudentActions>((set) => ({
   // State
-  authData: null,
   profile: null,
   attendance: [],
   subjects: [],
@@ -32,16 +28,6 @@ const useStudentStore = create<StudentState & StudentActions>((set) => ({
   error: null,
 
   // Actions
-  login: (data) => {
-    localStorage.setItem('student', JSON.stringify(data));
-    set({ authData: data });
-  },
-  
-  logout: () => {
-    localStorage.removeItem('student');
-    set({ authData: null, profile: null });
-  },
-  
   setProfile: (profile) => set({ profile }),
   
   updateProfile: (updates) => set((state) => ({
@@ -82,7 +68,6 @@ const useStudentStore = create<StudentState & StudentActions>((set) => ({
   },
   
   reset: () => set({
-    authData: null,
     profile: null,
     attendance: [],
     subjects: [],

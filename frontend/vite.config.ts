@@ -8,8 +8,13 @@ export default defineConfig({
   plugins: [react(), tailwindcss()],
   server: {
     proxy: {
-      api: 'https://erp-server-production-637a.up.railway.app/'
-    }
+      '/api': {
+        target: 'https://erp-server-production-637a.up.railway.app',
+        changeOrigin: true,
+        secure: false,
+        rewrite: path => path.replace(/^\/api/, '/api'),
+      },
+    },
   },
   resolve: {
     alias: {

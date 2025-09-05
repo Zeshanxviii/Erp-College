@@ -1,7 +1,6 @@
 import { create } from 'zustand';
 
 interface FacultyState {
-  authData: any | null;
   profile: any | null;
   courses: any[];
   attendanceRecords: any[];
@@ -11,8 +10,6 @@ interface FacultyState {
 }
 
 interface FacultyActions {
-  login: (data: any) => void;
-  logout: () => void;
   setProfile: (profile: any) => void;
   updateProfile: (updates: any) => void;
   fetchCourses: () => Promise<void>;
@@ -23,7 +20,6 @@ interface FacultyActions {
 
 const useFacultyStore = create<FacultyState & FacultyActions>((set) => ({
   // State
-  authData: null,
   profile: null,
   courses: [],
   attendanceRecords: [],
@@ -32,16 +28,6 @@ const useFacultyStore = create<FacultyState & FacultyActions>((set) => ({
   error: null,
 
   // Actions
-  login: (data) => {
-    localStorage.setItem('faculty', JSON.stringify(data));
-    set({ authData: data });
-  },
-  
-  logout: () => {
-    localStorage.removeItem('faculty');
-    set({ authData: null, profile: null });
-  },
-  
   setProfile: (profile) => set({ profile }),
   
   updateProfile: (updates) => set((state) => ({
@@ -90,7 +76,6 @@ const useFacultyStore = create<FacultyState & FacultyActions>((set) => ({
   },
   
   reset: () => set({
-    authData: null,
     profile: null,
     courses: [],
     attendanceRecords: [],

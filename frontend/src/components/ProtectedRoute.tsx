@@ -8,7 +8,10 @@ interface ProtectedRouteProps {
 
 const ProtectedRoute = ({ requiredRole, children }: ProtectedRouteProps) => {
   const location = useLocation();
-  const token = localStorage.getItem(`${requiredRole}Token`);
+  // const token = localStorage.getItem(`${requiredRole}Token`);
+  const token = localStorage.getItem("authToken");
+
+  console.log( token, " rendered token from ProtectedRoute")
   
   if (!token) {
     // Redirect to login page, saving current location

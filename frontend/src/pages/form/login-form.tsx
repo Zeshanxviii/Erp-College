@@ -3,12 +3,14 @@
 import type React from "react"
 
 import { useState } from "react"
+import { useNavigate } from "react-router"
 import apiService from "../../api"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Alert, AlertDescription } from "@/components/ui/alert"
 import { Eye, EyeOff, Mail, Lock } from "lucide-react"
+import { useAuthStore } from "@/store/authStore"
 
 interface LoginFormProps {
   userType: string
@@ -20,57 +22,94 @@ export function LoginForm({ userType }: LoginFormProps) {
   const [showPassword, setShowPassword] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState("")
+  
+  // Store hooks - now using unified authStore
+  const { login: authLogin, setLoading: setAuthLoading, error: authError } = useAuthStore()
+  
+  const navigate = useNavigate()
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setError("")
+    setAuthLoading(true)
     setIsLoading(true)
 
     // Enhanced validation
     if (!email || !password) {
       setError("Please fill in all fields")
+      setAuthLoading(false)
       setIsLoading(false)
       return
     }
 
-    // const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-    // if (!emailRegex.test(email)) {
-    //   setError("Please enter a valid email address")
-    //   setIsLoading(false)
-    //   return
-    // }
-
     try {
       // Make API call based on user type
       let response;
+      let userData;
+      
       switch (userType) {
         case "admin":
           response = await apiService.admin.login({ username: email, password })
+          
+          // Create admin user data
+          userData = {
+            id: response.data.user?.id || '1',
+            email: email,
+            name: response.data.user?.username || email.split('@')[0],
+            role: 'admin' as const,
+            permissions: [],
+            lastLogin: new Date().toISOString()
+          };
           break
+          
         case "faculty":
           response = await apiService.faculty.login({ username: email, password })
+          
+          // Create faculty user data
+          userData = {
+            id: response.data.user?.id || '1',
+            email: email,
+            name: response.data.user?.username || email.split('@')[0],
+            role: 'faculty' as const,
+            department: 'Computer Science' // Default value since API doesn't provide this
+          };
           break
+          
         case "student":
           response = await apiService.student.login({ username: email, password })
+          
+          // Create student user data
+          userData = {
+            id: response.data.user?.id || '1',
+            email: email,
+            name: response.data.user?.username || email.split('@')[0],
+            role: 'student' as const,
+            department: 'Computer Science', // Default value since API doesn't provide this
+            year: 2, // Default value since API doesn't provide this
+            semester: 3 // Default value since API doesn't provide this
+          };
           break
+          
         default:
           throw new Error("Invalid user type")
       }
 
-      // Store token and user type
-      localStorage.setItem(`${userType}Token`, response.data.token)
-      localStorage.setItem('userType', userType)
+      // Use unified auth store for all user types
+      if (userData && response.data.token) {
+        console.log('LoginForm: Logging in user with unified auth store:', userData)
+        authLogin(userData, response.data.token)
+      }
 
-      // Redirect to appropriate portal
+      // Redirect to appropriate portal using React Router
       switch (userType) {
         case "admin":
-          window.location.href = "/admin-portal"
+          navigate("/admin")
           break
         case "faculty":
-          window.location.href = "/staff-portal"
+          navigate("/staff-portal")
           break
         case "student":
-          window.location.href = "/student-portal"
+          navigate("/student-portal")
           break
       }
 
@@ -78,6 +117,7 @@ export function LoginForm({ userType }: LoginFormProps) {
       console.error("Login error:", err)
       setError(err.response?.data?.message || "Login failed. Please check your credentials.")
     } finally {
+      setAuthLoading(false)
       setIsLoading(false)
     }
   }

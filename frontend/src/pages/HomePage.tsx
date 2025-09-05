@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Link } from "react-router"
+import AuthDebugger from "@/components/AuthDebugger"
 import {
   GraduationCap,
   Users,
@@ -71,6 +72,11 @@ export default function HomePage() {
             <Button variant="outline" size="lg" className="text-lg px-8 py-3 font-semibold bg-transparent">
               Schedule Demo
             </Button>
+          </div>
+          
+          {/* Temporary Auth Debugger - Remove in production */}
+          <div className="mt-8 flex justify-center">
+            <AuthDebugger />
           </div>
         </div>
       </section>

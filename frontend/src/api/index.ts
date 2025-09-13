@@ -8,9 +8,19 @@ export interface AdminLoginData {
 
 // Define FacultyCreateData type (replace fields as needed)
 export interface FacultyCreateData {
+  // departmentId: string;
+  // password: string;
+  // username: string;
+  // passwordUpdated: Boolean;
   name: string;
-  departmentId: string;
+  dob: string;
   email: string;
+  contactNumber: string;
+  department: string;
+  designation: string;
+  gender: string;
+  joiningYear: number;
+  avatar?: string;
   // Add other fields as required
 }
 
@@ -25,7 +35,7 @@ export interface FacultyResponse {
 
 // Define DepartmentCreateData type (replace fields as needed)
 export interface DepartmentCreateData {
-  name: string;
+  department: string;
   // Add other fields as required
 }
 
@@ -169,12 +179,12 @@ const apiService = {
 admin: {
     login: (data: AdminLoginData) => api.post<AdminLoginResponse>('/admin/login', data),
     logout: () => api.post<void>('/admin/logout'),
-    createDepartment: (data: DepartmentCreateData) => api.post<DepartmentResponse>('/admin/department', data),
-    createFaculty: (data: FacultyCreateData) => api.post<FacultyResponse>('/admin/faculty', data),
+    createDepartment: (data: DepartmentCreateData) => api.post<DepartmentResponse>('/admin/adddepartment', data),
+    createFaculty: (data: FacultyCreateData) => api.post<FacultyResponse>('/admin/addfaculty', data),
     createStudent: (data: StudentCreateData) => api.post<StudentResponse>('/admin/student', data),
     createSubject: (data: SubjectCreateData) => api.post<SubjectResponse>('/admin/subject', data),
     getDepartments: () => api.get<DepartmentResponse[]>('/admin/departments'),
-    getFaculty: () => api.get<FacultyResponse[]>('/admin/faculty'),
+    getFaculty: () => api.get<FacultyResponse[]>('/admin/getallstudent'),
     getStudents: () => api.get<StudentResponse[]>('/admin/students'),
     getSubjects: () => api.get<SubjectResponse[]>('/admin/subjects'),
     // Add more endpoints as needed

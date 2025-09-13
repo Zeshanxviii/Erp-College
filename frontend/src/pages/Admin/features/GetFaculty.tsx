@@ -3,13 +3,19 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
-import { useAdminFaculties, useAdminFetchFaculties, useAdminLoading } from '@/store/adminStore';
+import { 
+  useAdminFaculties, 
+  useAdminFetchFaculties, 
+  useAdminLoading, 
+  useAdminError 
+} from '@/store/adminStore';
 import { Search, Edit, Trash2, Eye, Mail, Phone } from 'lucide-react';
 
 const GetFaculty = () => {
   const fetchFaculties = useAdminFetchFaculties();
   const faculties = useAdminFaculties();
   const loading = useAdminLoading();
+  const error = useAdminError();
   const [searchTerm, setSearchTerm] = useState('');
   const [filteredFaculty, setFilteredFaculty] = useState(faculties);
 
@@ -20,10 +26,10 @@ const GetFaculty = () => {
   useEffect(() => {
     if (searchTerm) {
       const filtered = faculties.filter(facultyMember =>
-        facultyMember.firstName.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        facultyMember.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        facultyMember.departmentName.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        facultyMember.position.toLowerCase().includes(searchTerm.toLowerCase())
+        facultyMember.firstName?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        facultyMember.email?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        facultyMember.departmentName?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        facultyMember.position?.toLowerCase().includes(searchTerm.toLowerCase())
       );
       setFilteredFaculty(filtered);
     } else {
@@ -35,8 +41,29 @@ const GetFaculty = () => {
     return (
       <div className="container mx-auto p-6">
         <div className="flex items-center justify-center h-64">
-          <div className="text-lg">Loading faculty...</div>
+          <div className="text-lg">Loading faculty data...</div>
         </div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="container mx-auto p-6">
+        <Card className="bg-red-50 border-red-200">
+          <CardHeader>
+            <CardTitle className="text-red-700">Error Loading Faculty</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <p className="text-red-600 mb-4">{error}</p>
+            <Button 
+              variant="destructive"
+              onClick={() => fetchFaculties()}
+            >
+              Retry
+            </Button>
+          </CardContent>
+        </Card>
       </div>
     );
   }

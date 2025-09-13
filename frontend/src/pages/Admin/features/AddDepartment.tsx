@@ -6,15 +6,16 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import useAdminStore from '@/store/adminStore';
 import { toast } from 'sonner';
 import { useAdminCreateDepartment } from "@/store/adminStore"
+import apiService from "@/api";
 
 const AddDepartment = () => {
   const [formData, setFormData] = useState({
-    name: '',
-    code: '',
-    description: '',
-    hod: '',
-    totalSeats: '',
-    establishedYear: ''
+     department: '',
+    // code: '',
+    // description: '',
+    // hod: '',
+    // totalSeats: '',
+    // establishedYear: ''
   });
 
   const { loading } = useAdminStore();
@@ -30,15 +31,17 @@ const AddDepartment = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
+      console.log(formData)
+      await apiService.admin.createDepartment(formData);
       await createDepartment(formData);
       toast.success('Department added successfully!');
       setFormData({
-        name: '',
-        code: '',
-        description: '',
-        hod: '',
-        totalSeats: '',
-        establishedYear: ''
+        department: '',
+        // code: '',
+        // description: '',
+        // hod: '',
+        // totalSeats: '',
+        // establishedYear: ''
       });
     } catch (error) {
       toast.error('Failed to add department');
@@ -58,18 +61,18 @@ const AddDepartment = () => {
           <form onSubmit={handleSubmit} className="space-y-4">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="space-y-2">
-                <Label htmlFor="name">Department Name</Label>
+                <Label htmlFor="department">Department Name</Label>
                 <Input
-                  id="name"
-                  name="name"
-                  value={formData.name}
+                  id="department"
+                  name="department"
+                  value={formData.department}
                   onChange={handleChange}
                   required
                   placeholder="Enter department name"
                 />
               </div>
               
-              <div className="space-y-2">
+              {/* <div className="space-y-2">
                 <Label htmlFor="code">Department Code</Label>
                 <Input
                   id="code"
@@ -79,9 +82,9 @@ const AddDepartment = () => {
                   required
                   placeholder="Enter department code"
                 />
-              </div>
+              </div> */}
 
-              <div className="space-y-2">
+              {/* <div className="space-y-2">
                 <Label htmlFor="hod">Head of Department</Label>
                 <Input
                   id="hod"
@@ -91,9 +94,9 @@ const AddDepartment = () => {
                   required
                   placeholder="Enter HOD name"
                 />
-              </div>
+              </div> */}
 
-              <div className="space-y-2">
+              {/* <div className="space-y-2">
                 <Label htmlFor="totalSeats">Total Seats</Label>
                 <Input
                   id="totalSeats"
@@ -105,9 +108,9 @@ const AddDepartment = () => {
                   required
                   placeholder="Enter total seats"
                 />
-              </div>
+              </div> */}
 
-              <div className="space-y-2">
+              {/* <div className="space-y-2">
                 <Label htmlFor="establishedYear">Established Year</Label>
                 <Input
                   id="establishedYear"
@@ -120,10 +123,10 @@ const AddDepartment = () => {
                   required
                   placeholder="Enter established year"
                 />
-              </div>
+              </div> */}
             </div>
 
-            <div className="space-y-2">
+            {/* <div className="space-y-2">
               <Label htmlFor="description">Description</Label>
               <textarea
                 id="description"
@@ -134,7 +137,7 @@ const AddDepartment = () => {
                 className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                 placeholder="Enter department description"
               />
-            </div>
+            </div> */}
 
             <Button type="submit" className="w-full" disabled={loading}>
               {loading ? 'Adding Department...' : 'Add Department'}

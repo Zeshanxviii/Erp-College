@@ -98,28 +98,44 @@ const useAdminStore = create<AdminState>()(
       fetchFaculties: async () => {
         set({ loading: true, error: null });
         try {
-          const res = await apiService.admin.getFaculty(); // adjust method as needed
-          const apiFaculties = (res.data as any[]) || [];
-          const mapped: Faculty[] = apiFaculties.map((f: any) => ({
-            id: f.id ?? f._id ?? '',
-            name: f.name ?? '',
-            firstName: f.firstName ?? (typeof f.name === 'string' ? (f.name.split(' ')[0] ?? '') : ''),
-            lastName: f.lastName ?? (typeof f.name === 'string' ? (f.name.split(' ').slice(1).join(' ') ?? '') : ''),
-            position: f.position ?? '',
-            qualification: f.qualification ?? '',
-            departmentId: f.departmentId ?? f.department?._id ?? '',
-            departmentName: f.departmentName ?? f.department?.name ?? '',
-            email: f.email ?? '',
-            phone: f.phone ?? '',
-            joiningDate: f.joiningDate ?? f.createdAt ?? '',
-            status: f.status ?? 'active',
-            experience: f.experience ?? 0,
-            hireDate: f.hireDate ?? f.joiningDate ?? f.createdAt ?? '',
+          // Make actual API call to fetch faculties
+          const response = await apiService.admin.getFaculty();
+          
+          // Check if response data is valid
+          if (!response.data || !Array.isArray(response.data)) {
+            throw new Error('Invalid faculty data received from API');
+          }
+          
+          // Map API data to Faculty type
+          const mappedFaculties: Faculty[] = response.data.map((faculty: any) => ({
+            id: faculty.id || faculty._id || '',
+            name: faculty.name || '',
+            firstName: faculty.firstName || (faculty.name ? faculty.name.split(' ')[0] : ''),
+            lastName: faculty.lastName || (faculty.name ? faculty.name.split(' ').slice(1).join(' ') : ''),
+            position: faculty.position || '',
+            qualification: faculty.qualification || '',
+            departmentId: faculty.departmentId || (faculty.department ? faculty.department._id : '') || '',
+            departmentName: faculty.departmentName || (faculty.department ? faculty.department.name : '') || '',
+            email: faculty.email || '',
+            phone: faculty.phone || '',
+            joiningDate: faculty.joiningDate || faculty.createdAt || '',
+            status: faculty.status || 'active',
+            experience: faculty.experience || 0,
+            hireDate: faculty.hireDate || faculty.joiningDate || faculty.createdAt || '',
           }));
-          set({ faculties: mapped, loading: false });
+          
+          // Update state with fetched faculties
+          set({ 
+            faculties: mappedFaculties, 
+            loading: false,
+            error: null
+          });
         } catch (error: any) {
-          set({ error: error.message || 'Failed to fetch faculties', loading: false });
-          throw error;
+          console.error('Error fetching faculties:', error);
+          set({ 
+            error: error.message || 'Failed to fetch faculty data',
+            loading: false 
+          });
         }
       },
       

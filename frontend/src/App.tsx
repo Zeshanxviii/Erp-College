@@ -26,9 +26,9 @@ import GetSubjects from "./pages/Admin/features/GetSubjects";
 // import UploadMarks from "./pages/Faculty/UploadMarks";
 // import CreateTest from "./pages/Faculty/CreateTest";
 
-// Student Components
-import StudentDashboard from "./pages/Student/StudentDashboard";
-import StudentAttendance from "./pages/Student/StudentAttendance";
+// // Student Components
+// import StudentDashboard from "./pages/Student/StudentDashboard";
+// import StudentAttendance from "./pages/Student/StudentAttendance";
 import StudentSubjects from "./pages/Student/StudentSubjects";
 import StudentResults from "./pages/Student/StudentResults";
 import { useAuthIsAdmin } from "./store/authStore";
@@ -78,8 +78,8 @@ function App() {
             <StudentLayout />
           </ProtectedRoute>
         }>
-          <Route index element={<StudentDashboard />} />
-          <Route path="attendance" element={<StudentAttendance />} />
+          {/* <Route index element={<StudentDashboard />} /> */}
+          {/* <Route path="attendance" element={<StudentAttendance />} /> */}
           <Route path="subjects" element={<StudentSubjects />} />
           <Route path="results" element={<StudentResults />} />
         </Route>

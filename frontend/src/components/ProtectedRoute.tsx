@@ -6,7 +6,7 @@ interface ProtectedRouteProps {
   children: React.ReactNode;
 }
 
-const ProtectedRoute = ({ requiredRole, children }: ProtectedRouteProps) => {
+const ProtectedRoute = ({ children }: ProtectedRouteProps) => {
   const location = useLocation();
   // const token = localStorage.getItem(`${requiredRole}Token`);
   const token = localStorage.getItem("authToken");

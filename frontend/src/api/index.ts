@@ -50,9 +50,20 @@ export interface DepartmentResponse {
 export interface StudentCreateData {
   name: string;
   email: string;
-  departmentId: string;
-  // Add other fields as required
+  departmentId: string;        // Assuming this is used instead of department name
+  dob: string;                 // Format: YYYY-MM-DD
+  contactNumber: string;       // 10-digit string
+  section: string;
+  gender: 'Male' | 'Female' | 'Other';
+  batch: string;               // e.g., "2023"
+  year: string;                // e.g., "1", "2", etc.
+  fatherName: string;
+  motherName: string;
+  fatherContactNumber: string; // 10-digit string
+  motherContactNumber: string; // 10-digit string
+  avatar?: string;             // Optional URI string
 }
+
 
 // Define StudentResponse type (replace fields as needed)
 export interface StudentResponse {
@@ -181,10 +192,10 @@ admin: {
     logout: () => api.post<void>('/admin/logout'),
     createDepartment: (data: DepartmentCreateData) => api.post<DepartmentResponse>('/admin/adddepartment', data),
     createFaculty: (data: FacultyCreateData) => api.post<FacultyResponse>('/admin/addfaculty', data),
-    createStudent: (data: StudentCreateData) => api.post<StudentResponse>('/admin/student', data),
+    createStudent: (data: StudentCreateData) => api.post<StudentResponse>('/admin/addstudent', data),
     createSubject: (data: SubjectCreateData) => api.post<SubjectResponse>('/admin/subject', data),
     getDepartments: () => api.get<DepartmentResponse[]>('/admin/departments'),
-    getFaculty: () => api.get<FacultyResponse[]>('/admin/getallstudent'),
+    getFaculty: () => api.get<FacultyResponse[]>('/admin/getallfaculty'),
     getStudents: () => api.get<StudentResponse[]>('/admin/students'),
     getSubjects: () => api.get<SubjectResponse[]>('/admin/subjects'),
     // Add more endpoints as needed

@@ -144,7 +144,8 @@ const useAdminStore = create<AdminState>()(
         set({ loading: true, error: null });
         try {
           // API call would go here
-          // const response = await apiService.admin.createStudent(data);
+          const response = await apiService.admin.createStudent(data);
+          console.log(`Response of createStudent:`, response);
           set((state) => ({ 
             students: [...state.students, data],
             loading: false 

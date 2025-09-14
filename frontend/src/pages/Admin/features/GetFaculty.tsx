@@ -9,7 +9,7 @@ import {
   useAdminLoading, 
   useAdminError 
 } from '@/store/adminStore';
-import { Search, Edit, Trash2, Eye, Mail, Phone } from 'lucide-react';
+import { Search, Edit, Trash2, Eye, Phone } from 'lucide-react';
 
 const GetFaculty = () => {
   const fetchFaculties = useAdminFetchFaculties();

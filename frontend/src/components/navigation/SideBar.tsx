@@ -1,16 +1,16 @@
 import { NavLink } from "react-router";
 import { Button } from "@/components/ui/button";
 import { 
-  BookOpen, 
+  // BookOpen, 
   GraduationCap, 
   Building2, 
   FileText, 
   Settings,
   Home,
   UserPlus,
-  UserMinus,
-  Trash2,
-  Users,
+  // UserMinus,
+  // Trash2,
+  // Users,
   Eye
 } from "lucide-react";
 

@@ -1,6 +1,7 @@
 import { useState, useCallback } from 'react';
-import axios, { AxiosError, AxiosResponse } from 'axios';
-import { ApiResponse } from '@/types';
+import axios, { AxiosError } from 'axios';
+import type { AxiosResponse } from 'axios';
+import type { ApiResponse } from '@/types';
 
 interface UseApiState<T> {
   data: T | null;

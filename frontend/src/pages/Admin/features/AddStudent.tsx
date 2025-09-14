@@ -10,13 +10,18 @@ const AddStudent = () => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
-    password: '',
-    rollNo: '',
     department: '',
+    dob: '',
+    contactNumber: '',
+    section: '',
+    gender: '',
+    batch: '',
     year: '',
-    semester: '',
-    phone: '',
-    address: ''
+    fatherName: '',
+    motherName: '',
+    fatherContactNumber: '',
+    motherContactNumber: '',
+    avatar: '',
   });
 
   const { createStudent, loading } = useAdminStore();
@@ -36,13 +41,18 @@ const AddStudent = () => {
       setFormData({
         name: '',
         email: '',
-        password: '',
-        rollNo: '',
         department: '',
+        dob: '',
+        contactNumber: '',
+        section: '',
+        gender: '',
+        batch: '',
         year: '',
-        semester: '',
-        phone: '',
-        address: ''
+        fatherName: '',
+        motherName: '',
+        fatherContactNumber: '',
+        motherContactNumber: '',
+        avatar: '',
       });
     } catch (error) {
       toast.error('Failed to add student');
@@ -51,146 +61,219 @@ const AddStudent = () => {
 
   return (
     <div className="container mx-auto p-6">
-      <Card className="max-w-2xl mx-auto">
+      <Card className="max-w-3xl mx-auto">
         <CardHeader>
           <CardTitle>Add New Student</CardTitle>
-          <CardDescription>
-            Enter student information to add them to the system
-          </CardDescription>
+          <CardDescription>Enter all required details to register a student.</CardDescription>
         </CardHeader>
         <CardContent>
-          <form onSubmit={handleSubmit} className="space-y-4">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div className="space-y-2">
-                <Label htmlFor="name">Full Name</Label>
-                <Input
-                  id="name"
-                  name="name"
-                  value={formData.name}
-                  onChange={handleChange}
-                  required
-                  placeholder="Enter full name"
-                />
-              </div>
-              
-              <div className="space-y-2">
-                <Label htmlFor="email">Email</Label>
-                <Input
-                  id="email"
-                  name="email"
-                  type="email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  required
-                  placeholder="Enter email address"
-                />
-              </div>
+          <form onSubmit={handleSubmit} className="space-y-6">
 
-              <div className="space-y-2">
-                <Label htmlFor="password">Password</Label>
-                <Input
-                  id="password"
-                  name="password"
-                  type="password"
-                  value={formData.password}
-                  onChange={handleChange}
-                  required
-                  placeholder="Enter password"
-                />
-              </div>
+            {/* Personal Info */}
+            <div>
+              <h3 className="text-lg font-semibold mb-2">Personal Information</h3>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="space-y-2">
+                  <Label htmlFor="name">Full Name</Label>
+                  <Input
+                    id="name"
+                    name="name"
+                    value={formData.name}
+                    onChange={handleChange}
+                    required
+                    placeholder="Enter full name"
+                  />
+                </div>
 
-              <div className="space-y-2">
-                <Label htmlFor="rollNo">Roll Number</Label>
-                <Input
-                  id="rollNo"
-                  name="rollNo"
-                  value={formData.rollNo}
-                  onChange={handleChange}
-                  required
-                  placeholder="Enter roll number"
-                />
-              </div>
+                <div className="space-y-2">
+                  <Label htmlFor="email">Email</Label>
+                  <Input
+                    id="email"
+                    name="email"
+                    type="email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    required
+                    placeholder="Enter email address"
+                  />
+                </div>
 
-              <div className="space-y-2">
-                <Label htmlFor="department">Department</Label>
-                <select
-                  id="department"
-                  name="department"
-                  value={formData.department}
-                  onChange={handleChange}
-                  required
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                >
-                  <option value="">Select Department</option>
-                  <option value="Computer Science">Computer Science</option>
-                  <option value="Electrical Engineering">Electrical Engineering</option>
-                  <option value="Mechanical Engineering">Mechanical Engineering</option>
-                  <option value="Civil Engineering">Civil Engineering</option>
-                  <option value="Information Technology">Information Technology</option>
-                </select>
-              </div>
+                <div className="space-y-2">
+                  <Label htmlFor="dob">Date of Birth</Label>
+                  <Input
+                    id="dob"
+                    name="dob"
+                    type="date"
+                    value={formData.dob}
+                    onChange={handleChange}
+                    required
+                  />
+                </div>
 
-              <div className="space-y-2">
-                <Label htmlFor="year">Year</Label>
-                <select
-                  id="year"
-                  name="year"
-                  value={formData.year}
-                  onChange={handleChange}
-                  required
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                >
-                  <option value="">Select Year</option>
-                  <option value="1">1st Year</option>
-                  <option value="2">2nd Year</option>
-                  <option value="3">3rd Year</option>
-                  <option value="4">4th Year</option>
-                </select>
-              </div>
+                <div className="space-y-2">
+                  <Label htmlFor="contactNumber">Contact Number</Label>
+                  <Input
+                    id="contactNumber"
+                    name="contactNumber"
+                    value={formData.contactNumber}
+                    onChange={handleChange}
+                    required
+                    placeholder="10-digit phone number"
+                    pattern="\d{10}"
+                  />
+                </div>
 
-              <div className="space-y-2">
-                <Label htmlFor="semester">Semester</Label>
-                <select
-                  id="semester"
-                  name="semester"
-                  value={formData.semester}
-                  onChange={handleChange}
-                  required
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                >
-                  <option value="">Select Semester</option>
-                  <option value="1">1st Semester</option>
-                  <option value="2">2nd Semester</option>
-                  <option value="3">3rd Semester</option>
-                  <option value="4">4th Semester</option>
-                  <option value="5">5th Semester</option>
-                  <option value="6">6th Semester</option>
-                  <option value="7">7th Semester</option>
-                  <option value="8">8th Semester</option>
-                </select>
-              </div>
+                <div className="space-y-2">
+                  <Label htmlFor="gender">Gender</Label>
+                  <select
+                    id="gender"
+                    name="gender"
+                    value={formData.gender}
+                    onChange={handleChange}
+                    required
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  >
+                    <option value="">Select Gender</option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                    <option value="Other">Other</option>
+                  </select>
+                </div>
 
-              <div className="space-y-2">
-                <Label htmlFor="phone">Phone Number</Label>
-                <Input
-                  id="phone"
-                  name="phone"
-                  value={formData.phone}
-                  onChange={handleChange}
-                  placeholder="Enter phone number"
-                />
+                <div className="space-y-2">
+                  <Label htmlFor="avatar">Avatar URL (optional)</Label>
+                  <Input
+                    id="avatar"
+                    name="avatar"
+                    value={formData.avatar}
+                    onChange={handleChange}
+                    placeholder="https://example.com/avatar.jpg"
+                  />
+                </div>
               </div>
             </div>
 
-            <div className="space-y-2">
-              <Label htmlFor="address">Address</Label>
-              <Input
-                id="address"
-                name="address"
-                value={formData.address}
-                onChange={handleChange}
-                placeholder="Enter address"
-              />
+            {/* Academic Info */}
+            <div>
+              <h3 className="text-lg font-semibold mb-2">Academic Information</h3>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="space-y-2">
+                  <Label htmlFor="department">Department</Label>
+                  <select
+                    id="department"
+                    name="department"
+                    value={formData.department}
+                    onChange={handleChange}
+                    required
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md"
+                  >
+                    <option value="">Select Department</option>
+                    <option value="Computer Science">Computer Science</option>
+                    <option value="Electrical Engineering">Electrical Engineering</option>
+                    <option value="Mechanical Engineering">Mechanical Engineering</option>
+                    <option value="Civil Engineering">Civil Engineering</option>
+                    <option value="Information Technology">Information Technology</option>
+                  </select>
+                </div>
+
+                <div className="space-y-2">
+                  <Label htmlFor="section">Section</Label>
+                  <Input
+                    id="section"
+                    name="section"
+                    value={formData.section}
+                    onChange={handleChange}
+                    required
+                    placeholder="e.g., A, B"
+                  />
+                </div>
+
+                <div className="space-y-2">
+                  <Label htmlFor="batch">Batch</Label>
+                  <Input
+                    id="batch"
+                    name="batch"
+                    value={formData.batch}
+                    onChange={handleChange}
+                    required
+                    placeholder="e.g., 2023"
+                  />
+                </div>
+
+                <div className="space-y-2">
+                  <Label htmlFor="year">Year</Label>
+                  <select
+                    id="year"
+                    name="year"
+                    value={formData.year}
+                    onChange={handleChange}
+                    required
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md"
+                  >
+                    <option value="">Select Year</option>
+                    <option value="1">1st Year</option>
+                    <option value="2">2nd Year</option>
+                    <option value="3">3rd Year</option>
+                    <option value="4">4th Year</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            {/* Parent Info */}
+            <div>
+              <h3 className="text-lg font-semibold mb-2">Parent Information</h3>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="space-y-2">
+                  <Label htmlFor="fatherName">Father's Name</Label>
+                  <Input
+                    id="fatherName"
+                    name="fatherName"
+                    value={formData.fatherName}
+                    onChange={handleChange}
+                    required
+                    placeholder="Enter father's name"
+                  />
+                </div>
+
+                <div className="space-y-2">
+                  <Label htmlFor="motherName">Mother's Name</Label>
+                  <Input
+                    id="motherName"
+                    name="motherName"
+                    value={formData.motherName}
+                    onChange={handleChange}
+                    required
+                    placeholder="Enter mother's name"
+                  />
+                </div>
+
+                <div className="space-y-2">
+                  <Label htmlFor="fatherContactNumber">Father's Contact</Label>
+                  <Input
+                    id="fatherContactNumber"
+                    name="fatherContactNumber"
+                    value={formData.fatherContactNumber}
+                    onChange={handleChange}
+                    required
+                    placeholder="10-digit number"
+                    pattern="\d{10}"
+                  />
+                </div>
+
+                <div className="space-y-2">
+                  <Label htmlFor="motherContactNumber">Mother's Contact</Label>
+                  <Input
+                    id="motherContactNumber"
+                    name="motherContactNumber"
+                    value={formData.motherContactNumber}
+                    onChange={handleChange}
+                    required
+                    placeholder="10-digit number"
+                    pattern="\d{10}"
+                  />
+                </div>
+              </div>
             </div>
 
             <Button type="submit" className="w-full" disabled={loading}>

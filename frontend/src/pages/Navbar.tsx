@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button"
 import { GraduationCap, LogOut } from "lucide-react"
 import { Link } from "react-router"
-import { useAuthLogout, useAuthStore, useAuthUser } from "@/store/authStore";
+import { useAuthLogout, useAuthUser } from "@/store/authStore";
 
 const Navbar = () => {
   // const { user, logout } = useAuthStore()

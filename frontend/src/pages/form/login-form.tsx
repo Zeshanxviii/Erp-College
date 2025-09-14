@@ -24,7 +24,7 @@ export function LoginForm({ userType }: LoginFormProps) {
   const [error, setError] = useState("")
   
   // Store hooks - now using unified authStore
-  const { login: authLogin, setLoading: setAuthLoading, error: authError } = useAuthStore()
+  const { login: authLogin, setLoading: setAuthLoading} = useAuthStore()
   
   const navigate = useNavigate()
 

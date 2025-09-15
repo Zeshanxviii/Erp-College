@@ -153,7 +153,7 @@ export interface AdminLoginResponse {
 
 // Base configuration
 const api = axios.create({
-  baseURL: '/api',
+  baseURL: import.meta.env.VITE_BASE_URL || '/api',
   timeout: 10000,
   headers: {
     'Content-Type': 'application/json',

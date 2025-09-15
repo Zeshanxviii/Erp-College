@@ -67,11 +67,12 @@ export interface CreateStudentData {
 export interface Department {
   id: string;
   name: string;
-  code: string;
+  code?: string;
   description?: string;
   headOfDepartment?: string;
-  totalFaculty: number;
-  totalStudents: number;
+  totalFaculty?: number;
+  totalStudents?: number;
+  createdAt?: string;
 }
 
 export interface CreateDepartmentData {

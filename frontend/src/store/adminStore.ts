@@ -20,6 +20,7 @@ export interface AdminState {
   updateProfile: (updates: any) => void;
   clearError: () => void;
   setLoading: (loading: boolean) => void;
+  fetchDepartments: () => Promise<void>;
   
   // Data management actions
   createDepartment: (data: any) => Promise<void>;
@@ -62,10 +63,15 @@ const useAdminStore = create<AdminState>()(
       createDepartment: async (data: any) => {
         set({ loading: true, error: null });
         try {
-          // API call would go here
-          // const response = await apiService.admin.createDepartment(data);
+          const response = await apiService.admin.createDepartment(data);
+          // Map to Department type using backend fields
+          const newDepartment: Department = {
+            id: response.data._id ?? response.data.id,
+            name: response.data.department,
+            code: response.data.departmentCode,
+          };
           set((state) => ({ 
-            departments: [...state.departments, data],
+            departments: [...state.departments, newDepartment],
             loading: false 
           }));
         } catch (error: any) {
@@ -138,8 +144,27 @@ const useAdminStore = create<AdminState>()(
           });
         }
       },
-      
 
+      fetchDepartments: async () => {
+        set({ loading: true, error: null });
+        try {
+          const res = await apiService.admin.getDepartments();
+          const apiDepartments = (res.data as any[]) || [];
+          
+          const mapped: Department[] = apiDepartments.map((d: any) => ({
+            id: d._id ?? d.id ?? '',
+            name: d.department ?? d.name ?? '',
+            code: d.departmentCode ?? d.code ?? '',
+            description: d.description ?? '',
+          }));
+          
+          set({ departments: mapped, loading: false });
+        } catch (error: any) {
+          set({ error: error.message || 'Failed to fetch departments', loading: false });
+          throw error;
+        }
+      },
+      
       createStudent: async (data: any) => {
         set({ loading: true, error: null });
         try {

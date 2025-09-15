@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import useAdminStore from '@/store/adminStore';
+import useAdminStore, { useAdminDepartments } from '@/store/adminStore';
 import { toast } from 'sonner';
 
 const AddStudent = () => {
@@ -24,7 +24,19 @@ const AddStudent = () => {
     avatar: '',
   });
 
-  const { createStudent, loading } = useAdminStore();
+  const { createStudent, createDepartment, loading, fetchDepartments } = useAdminStore();
+  const departments = useAdminDepartments();
+
+  useEffect(() => {
+    // Fetch departments when component mounts
+    fetchDepartments();
+  }, [fetchDepartments]);
+
+  // Function to handle department creation and refresh
+  const handleCreateDepartment = async (data: any) => {
+    await createDepartment(data);
+    fetchDepartments(); // Refresh departments after creation
+  };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     setFormData({
@@ -75,14 +87,16 @@ const AddStudent = () => {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="space-y-2">
                   <Label htmlFor="name">Full Name</Label>
-                  <Input
-                    id="name"
-                    name="name"
-                    value={formData.name}
-                    onChange={handleChange}
-                    required
-                    placeholder="Enter full name"
-                  />
+                <Input
+                  id="name"
+                  name="name"
+                  value={formData.name}
+                  onChange={handleChange}
+                  required
+                  minLength={2}
+                  maxLength={50}
+                  placeholder="Enter full name (2-50 characters)"
+                />
                 </div>
 
                 <div className="space-y-2">
@@ -100,27 +114,30 @@ const AddStudent = () => {
 
                 <div className="space-y-2">
                   <Label htmlFor="dob">Date of Birth</Label>
-                  <Input
-                    id="dob"
-                    name="dob"
-                    type="date"
-                    value={formData.dob}
-                    onChange={handleChange}
-                    required
-                  />
+                <Input
+                  id="dob"
+                  name="dob"
+                  type="date"
+                  value={formData.dob}
+                  onChange={handleChange}
+                  required
+                  pattern="\d{4}-\d{2}-\d{2}"
+                  title="Date of Birth (YYYY-MM-DD)"
+                />
                 </div>
 
                 <div className="space-y-2">
                   <Label htmlFor="contactNumber">Contact Number</Label>
-                  <Input
-                    id="contactNumber"
-                    name="contactNumber"
-                    value={formData.contactNumber}
-                    onChange={handleChange}
-                    required
-                    placeholder="10-digit phone number"
-                    pattern="\d{10}"
-                  />
+                <Input
+                  id="contactNumber"
+                  name="contactNumber"
+                  value={formData.contactNumber}
+                  onChange={handleChange}
+                  required
+                  placeholder="10-digit phone number"
+                  pattern="\d{10}"
+                  title="10-digit phone number"
+                />
                 </div>
 
                 <div className="space-y-2">
@@ -168,11 +185,11 @@ const AddStudent = () => {
                     className="w-full px-3 py-2 border border-gray-300 rounded-md"
                   >
                     <option value="">Select Department</option>
-                    <option value="Computer Science">Computer Science</option>
-                    <option value="Electrical Engineering">Electrical Engineering</option>
-                    <option value="Mechanical Engineering">Mechanical Engineering</option>
-                    <option value="Civil Engineering">Civil Engineering</option>
-                    <option value="Information Technology">Information Technology</option>
+                    {departments.map((dept) => (
+                      <option key={dept.id} value={dept.name}>
+                        {dept.name}
+                      </option>
+                    ))}
                   </select>
                 </div>
 
@@ -226,52 +243,58 @@ const AddStudent = () => {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="space-y-2">
                   <Label htmlFor="fatherName">Father's Name</Label>
-                  <Input
-                    id="fatherName"
-                    name="fatherName"
-                    value={formData.fatherName}
-                    onChange={handleChange}
-                    required
-                    placeholder="Enter father's name"
-                  />
+                <Input
+                  id="fatherName"
+                  name="fatherName"
+                  value={formData.fatherName}
+                  onChange={handleChange}
+                  required
+                  minLength={2}
+                  maxLength={50}
+                  placeholder="Enter father's name (2-50 characters)"
+                />
                 </div>
 
                 <div className="space-y-2">
                   <Label htmlFor="motherName">Mother's Name</Label>
-                  <Input
-                    id="motherName"
-                    name="motherName"
-                    value={formData.motherName}
-                    onChange={handleChange}
-                    required
-                    placeholder="Enter mother's name"
-                  />
+                <Input
+                  id="motherName"
+                  name="motherName"
+                  value={formData.motherName}
+                  onChange={handleChange}
+                  required
+                  minLength={2}
+                  maxLength={50}
+                  placeholder="Enter mother's name (2-50 characters)"
+                />
                 </div>
 
                 <div className="space-y-2">
                   <Label htmlFor="fatherContactNumber">Father's Contact</Label>
-                  <Input
-                    id="fatherContactNumber"
-                    name="fatherContactNumber"
-                    value={formData.fatherContactNumber}
-                    onChange={handleChange}
-                    required
-                    placeholder="10-digit number"
-                    pattern="\d{10}"
-                  />
+                <Input
+                  id="fatherContactNumber"
+                  name="fatherContactNumber"
+                  value={formData.fatherContactNumber}
+                  onChange={handleChange}
+                  required
+                  placeholder="10-digit number"
+                  pattern="\d{10}"
+                  title="10-digit phone number"
+                />
                 </div>
 
                 <div className="space-y-2">
                   <Label htmlFor="motherContactNumber">Mother's Contact</Label>
-                  <Input
-                    id="motherContactNumber"
-                    name="motherContactNumber"
-                    value={formData.motherContactNumber}
-                    onChange={handleChange}
-                    required
-                    placeholder="10-digit number"
-                    pattern="\d{10}"
-                  />
+                <Input
+                  id="motherContactNumber"
+                  name="motherContactNumber"
+                  value={formData.motherContactNumber}
+                  onChange={handleChange}
+                  required
+                  placeholder="10-digit number"
+                  pattern="\d{10}"
+                  title="10-digit phone number"
+                />
                 </div>
               </div>
             </div>

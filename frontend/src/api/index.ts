@@ -41,8 +41,12 @@ export interface DepartmentCreateData {
 
 // Define DepartmentResponse type (replace fields as needed)
 export interface DepartmentResponse {
+  _id: string;
   id: string;
   name: string;
+  code: string;
+  department: string;
+  departmentCode: string;
   // Add other fields as required
 }
 
@@ -194,9 +198,9 @@ admin: {
     createFaculty: (data: FacultyCreateData) => api.post<FacultyResponse>('/admin/addfaculty', data),
     createStudent: (data: StudentCreateData) => api.post<StudentResponse>('/admin/addstudent', data),
     createSubject: (data: SubjectCreateData) => api.post<SubjectResponse>('/admin/subject', data),
-    getDepartments: () => api.get<DepartmentResponse[]>('/admin/departments'),
+    getDepartments: () => api.get<DepartmentResponse[]>('/admin/getalldepartment'),
     getFaculty: () => api.get<FacultyResponse[]>('/admin/getallfaculty'),
-    getStudents: () => api.get<StudentResponse[]>('/admin/students'),
+    getStudents: () => api.get<StudentResponse[]>('/admin/getallsubject'),
     getSubjects: () => api.get<SubjectResponse[]>('/admin/subjects'),
     // Add more endpoints as needed
   },

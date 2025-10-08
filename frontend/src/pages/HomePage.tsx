@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Link } from "react-router"
-import AuthDebugger from "@/components/AuthDebugger"
+// import AuthDebugger from "@/components/AuthDebugger"
 import {
   GraduationCap,
   Users,
@@ -23,42 +23,14 @@ import {
 export default function HomePage() {
   return (
     <div className="min-h-screen bg-background">
-      {/* Header */}
-      {/* <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-        <div className="container flex h-16 items-center justify-between">
-          <div className="flex items-center space-x-2">
-            <GraduationCap className="h-8 w-8 text-primary" />
-            <span className="text-xl font-bold text-foreground font-montserrat">EduManage</span>
-          </div>
-          <nav className="hidden md:flex items-center space-x-6">
-            <a href="#admin" className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors">
-              Admin
-            </a>
-            <a href="#staff" className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors">
-              Staff
-            </a>
-            <a
-              href="#students"
-              className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors"
-            >
-              Students
-            </a>
-            <Button variant="outline" size="sm">
-              Sign In
-            </Button>
-          </nav>
-        </div>
-      </header> */}
-
-      {/* Hero Section */}
       <section className="py-20 px-4 bg-gradient-to-b from-background to-muted/30">
         <div className="container mx-auto text-center">
-          <Badge variant="secondary" className="mb-6 text-sm px-4 py-2">
-            Trusted by 500+ Educational Institutions
+          <Badge variant="secondary" className="mb-6 bg-primary text-primary-foreground rounded-full px-4 py-2">
+            Trusted by 500+ Educational Institutions 🚀
           </Badge>
           <h1 className="text-4xl md:text-6xl font-black text-foreground mb-6 font-montserrat leading-tight">
             Empowering Educational
-            <span className="text-accent block">Management</span>
+            <span className="text-primary  block">Management</span>
           </h1>
           <p className="text-xl text-muted-foreground mb-8 max-w-3xl mx-auto leading-relaxed">
             A comprehensive ERP solution designed specifically for administrators, staff, and students to enhance
@@ -69,14 +41,14 @@ export default function HomePage() {
               Get Started Today
               <ChevronRight className="ml-2 h-5 w-5" />
             </Button>
-            <Button variant="outline" size="lg" className="text-lg px-8 py-3 font-semibold bg-transparent">
+            <Button variant="outline" size="lg" className="text-lg px-8 py-3 text-white font-semibold bg-transparent">
               Schedule Demo
             </Button>
           </div>
           
           {/* Temporary Auth Debugger - Remove in production */}
           <div className="mt-8 flex justify-center">
-            <AuthDebugger />
+            {/* <AuthDebugger /> */}
           </div>
         </div>
       </section>
@@ -85,7 +57,7 @@ export default function HomePage() {
       <section className="py-20 px-4">
         <div className="container mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4 font-montserrat">Built for Every User</h2>
+            <h2 className="text-3xl md:text-4xl text-foreground font-bold mb-4 font-montserrat">Built for Every User</h2>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
               Tailored experiences for administrators, staff, and students with role-specific features and interfaces.
             </p>
@@ -222,7 +194,7 @@ export default function HomePage() {
       <section className="py-20 px-4 bg-muted/30">
         <div className="container mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4 font-montserrat">Powerful Features</h2>
+            <h2 className="text-3xl md:text-4xl text-foreground font-bold mb-4 font-montserrat">Powerful Features</h2>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
               Everything you need to manage your educational institution effectively and efficiently
             </p>
@@ -231,7 +203,7 @@ export default function HomePage() {
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             <div className="text-center p-8 rounded-lg hover:bg-card transition-all duration-300 hover:shadow-lg">
               <Clock className="h-12 w-12 text-accent mx-auto mb-4" />
-              <h3 className="font-bold mb-3 font-montserrat">Real-time Updates</h3>
+              <h3 className="font-bold mb-3 text-foreground font-montserrat">Real-time Updates</h3>
               <p className="text-sm text-muted-foreground leading-relaxed">
                 Instant notifications and live data synchronization across all platforms
               </p>
@@ -239,7 +211,7 @@ export default function HomePage() {
 
             <div className="text-center p-8 rounded-lg hover:bg-card transition-all duration-300 hover:shadow-lg">
               <Shield className="h-12 w-12 text-accent mx-auto mb-4" />
-              <h3 className="font-bold mb-3 font-montserrat">Secure & Compliant</h3>
+              <h3 className="font-bold mb-3 text-foreground font-montserrat">Secure & Compliant</h3>
               <p className="text-sm text-muted-foreground leading-relaxed">
                 Enterprise-grade security with FERPA compliance and data protection
               </p>
@@ -247,7 +219,7 @@ export default function HomePage() {
 
             <div className="text-center p-8 rounded-lg hover:bg-card transition-all duration-300 hover:shadow-lg">
               <BarChart3 className="h-12 w-12 text-accent mx-auto mb-4" />
-              <h3 className="font-bold mb-3 font-montserrat">Advanced Analytics</h3>
+              <h3 className="font-bold mb-3 text-foreground font-montserrat">Advanced Analytics</h3>
               <p className="text-sm text-muted-foreground leading-relaxed">
                 Comprehensive reporting and actionable insights for better decision making
               </p>
@@ -255,7 +227,7 @@ export default function HomePage() {
 
             <div className="text-center p-8 rounded-lg hover:bg-card transition-all duration-300 hover:shadow-lg">
               <MessageSquare className="h-12 w-12 text-accent mx-auto mb-4" />
-              <h3 className="font-bold mb-3 font-montserrat">Seamless Communication</h3>
+              <h3 className="font-bold mb-3 text-foreground font-montserrat">Seamless Communication</h3>
               <p className="text-sm text-muted-foreground leading-relaxed">
                 Integrated messaging and collaboration tools for the entire campus
               </p>
@@ -295,7 +267,7 @@ export default function HomePage() {
             <div>
               <div className="flex items-center space-x-2 mb-6">
                 <GraduationCap className="h-8 w-8 text-accent" />
-                <span className="text-xl font-bold font-montserrat">EduManage</span>
+                <span className="text-xl font-bold text-foreground font-montserrat">EduManage</span>
               </div>
               <p className="text-sm text-muted-foreground leading-relaxed">
                 Empowering educational institutions with comprehensive ERP solutions for the digital age.
@@ -303,7 +275,7 @@ export default function HomePage() {
             </div>
 
             <div>
-              <h4 className="font-bold mb-4 font-montserrat">Quick Links</h4>
+              <h4 className="font-bold mb-4 text-foreground font-montserrat">Quick Links</h4>
               <ul className="space-y-3 text-sm text-muted-foreground">
                 <li>
                   <a href="#" className="hover:text-accent transition-colors">
@@ -329,7 +301,7 @@ export default function HomePage() {
             </div>
 
             <div>
-              <h4 className="font-bold mb-4 font-montserrat">Support</h4>
+              <h4 className="font-bold mb-4 text-foreground font-montserrat">Support</h4>
               <ul className="space-y-3 text-sm text-muted-foreground">
                 <li>
                   <a href="#" className="hover:text-accent transition-colors">
@@ -355,7 +327,7 @@ export default function HomePage() {
             </div>
 
             <div>
-              <h4 className="font-bold mb-4 font-montserrat">Legal</h4>
+              <h4 className="font-bold mb-4 text-foreground font-montserrat">Legal</h4>
               <ul className="space-y-3 text-sm text-muted-foreground">
                 <li>
                   <a href="#" className="hover:text-accent transition-colors">

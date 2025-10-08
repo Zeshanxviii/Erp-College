@@ -40,16 +40,16 @@ const Navbar = () => {
                 variant="outline" 
                 size="sm" 
                 onClick={logout}
-                className="flex items-center space-x-2"
+                className="flex items-center `space-x-2 text-muted-foreground"
               >
-                <LogOut className="h-4 w-4" />
+                <LogOut className="h-4 w-4 " />
                 Logout
               </Button>
             </div>
           ) : (
             // User is not logged in - show login buttons
               <Link to="/login">
-                <Button variant="outline" size="sm">
+                <Button variant="outline" className="text-muted-foreground" size="sm">
                   Login
                 </Button>
               </Link>

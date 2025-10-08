@@ -49,8 +49,8 @@ const adminMenuItems = [
 
 export default function SideBar() {
   return (
-    <div className="w-64 bg-white border-r border-gray-200 p-4 space-y-6">
-      <nav className="space-y-2">
+    <div className="w-64 border-r border-sidebar-border bg-sidebar text-sidebar-foreground p-4 space-y-6">
+      <nav className="space-y-2 ">
         {adminMenuItems.map((section, sectionIndex) => (
           <div key={sectionIndex} className="space-y-2 font-bold text-xl">
             {section.title && section.path ? (
@@ -59,7 +59,7 @@ export default function SideBar() {
                   <Button
                     variant={section.variant}
                     className={`w-full justify-start ${
-                      isActive ? "bg-blue-50 text-blue-700 border-blue-200" : ""
+                      isActive ? "bg-sidebar-accent text-sidebar-accent-foreground border-sidebar-accent" : "hover:bg-sidebar-accent hover:text-sidebar-accent-foreground"
                     }`}
                   >
                     {section.icon && <section.icon className="h-4 w-4 mr-2" />}
@@ -68,8 +68,8 @@ export default function SideBar() {
                 )}
               </NavLink>
             ) : (
-              <>
-                <h3 className="px-2 text-sm font-semibold text-gray-500 uppercase tracking-wider">
+              <div className="">
+                <h3 className="px-2 text-sm font-semibold text-muted-foreground  uppercase tracking-wider">
                   {section.title}
                 </h3>
                 <div className="space-y-1 pl-2">
@@ -80,7 +80,7 @@ export default function SideBar() {
                           variant={item.variant}
                           size="sm"
                           className={`w-full justify-start ${
-                            isActive ? "bg-blue-50 text-blue-700 border-blue-200" : ""
+                            isActive ? "bg-sidebar-accent text-sidebar-accent-foreground border-sidebar-accent" : "hover:bg-sidebar-accent hover:text-sidebar-accent-foreground"
                           }`}
                         >
                           {item.icon && <item.icon className="h-4 w-4 mr-2" />}
@@ -90,7 +90,7 @@ export default function SideBar() {
                     </NavLink>
                   ))}
                 </div>
-              </>
+              </div>
             )}
           </div>
         ))}

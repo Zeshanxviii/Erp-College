@@ -44,8 +44,8 @@ export default function AdminDashboard() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-3xl font-bold text-gray-900">Admin Dashboard</h1>
-        <p className="text-gray-600">Welcome back! Here's what's happening with your institution.</p>
+        <h1 className="text-3xl font-bold text-foreground">Admin Dashboard</h1>
+        <p className="text-muted-foreground">Welcome back! Here's what's happening with your institution.</p>
       </div>
 
       {/* Stats Cards */}
@@ -53,14 +53,14 @@ export default function AdminDashboard() {
         {stats.map((stat, index) => (
           <Card key={index}>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium text-gray-600">
+              <CardTitle className="text-sm font-medium text-muted-foreground">
                 {stat.title}
               </CardTitle>
               <stat.icon className="h-4 w-4 text-gray-400" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold text-gray-900">{stat.value}</div>
-              <p className="text-xs text-gray-600">{stat.description}</p>
+              <div className="text-2xl font-bold text-foreground">{stat.value}</div>
+              <p className="text-xs text-muted-foreground">{stat.description}</p>
               <div className="flex items-center text-xs text-green-600 mt-1">
                 <TrendingUp className="h-3 w-3 mr-1" />
                 {stat.change}
@@ -84,8 +84,8 @@ export default function AdminDashboard() {
                 <div key={index} className="flex items-center space-x-3">
                   <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
                   <div className="flex-1">
-                    <p className="text-sm text-gray-900">{activity.action}</p>
-                    <p className="text-xs text-gray-500">{activity.time}</p>
+                    <p className="text-sm text-foreground">{activity.action}</p>
+                    <p className="text-xs text-muted-foreground">{activity.time}</p>
                   </div>
                 </div>
               ))}
@@ -101,7 +101,7 @@ export default function AdminDashboard() {
           </CardHeader>
           <CardContent>
             <div className="grid grid-cols-2 gap-3">
-              <button className="p-3 text-left border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors">
+              <button className="p-3 text-left  border border-gray-200 ring rounded-lg hover:bg-background transition-colors">
                 <Users className="h-5 w-5 text-blue-600 mb-2" />
                 <p className="text-sm font-medium">Add Student</p>
                 <p className="text-xs text-gray-500">Enroll new student</p>

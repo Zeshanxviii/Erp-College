@@ -38,7 +38,7 @@ function App() {
   const IsAdminLogin = useAuthIsAdmin()
 
   return (
-    <div>
+    <div className="dark bg-black">
       <Navbar />
       <Routes>
         <Route path="/" element={<HomePage />} />

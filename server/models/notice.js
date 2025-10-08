@@ -1,26 +1,32 @@
 import mongoose from "mongoose";
 
-const noticeSchema = mongoose.Schema({
+const noticeSchema = new mongoose.Schema({
   topic: {
     type: String,
-    require: true,
+    required: true,
   },
   date: {
     type: String,
-    require: true,
+    required: true,
   },
   content: {
     type: String,
-    require: true,
+    required: true,
   },
   from: {
     type: String,
-    require: true,
+    required: true,
   },
   noticeFor: {
     type: String,
-    require: true,
+    required: true,
+  },
+  createdAt: {
+    type: Date,
+    default: Date.now,
+    // This tells MongoDB to delete the document 24 hours (86400 seconds) after creation
+    expires: 60 * 60 * 24, // 24 hours
   },
 });
 
-export default mongoose.model("notice", noticeSchema);
+export default mongoose.model("Notice", noticeSchema);

@@ -32,13 +32,12 @@ import GetSubjects from "./pages/Admin/features/GetSubjects";
 import StudentSubjects from "./pages/Student/StudentSubjects";
 import StudentResults from "./pages/Student/StudentResults";
 import { useAuthIsAdmin } from "./store/authStore";
-
 function App() {
 
   const IsAdminLogin = useAuthIsAdmin()
 
   return (
-    <div className="dark bg-black">
+    <div className="dark bg-background">
       <Navbar />
       <Routes>
         <Route path="/" element={<HomePage />} />

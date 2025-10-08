@@ -79,7 +79,7 @@ export default function SideBar() {
                         <Button
                           variant={item.variant}
                           size="sm"
-                          className={`w-full justify-start ${
+                          className={`w-full justify-start text-muted-foreground mt-2 ${
                             isActive ? "bg-sidebar-accent text-sidebar-accent-foreground border-sidebar-accent" : "hover:bg-sidebar-accent hover:text-sidebar-accent-foreground"
                           }`}
                         >

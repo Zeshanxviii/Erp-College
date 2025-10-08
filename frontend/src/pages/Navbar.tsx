@@ -32,9 +32,10 @@ const Navbar = () => {
 
           {user ? (
             // User is logged in - show user menu
-            <div className="flex items-center space-x-4">
-              <span className="text-sm text-muted-foreground">
-                Welcome, {user.name}
+            <div className="flex items-center  space-x-4">
+              <span className="text-sm text-foreground">
+                Welcome,
+                 <span className="text-primary">{user.name}</span>
               </span>
               <Button 
                 variant="outline" 

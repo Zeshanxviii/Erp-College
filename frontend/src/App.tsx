@@ -12,7 +12,7 @@ import StudentLayout from "./components/layout/StudentLayout";
 // Admin Components
 import AdminDashboard from "./pages/Admin/AdminDashboard";
 import AddFaculty from "./pages/Admin/features/AddFaculty";
-import AddStudent from "./pages/Admin/features/AddStudent";
+// import AddStudent from "./pages/Admin/features/AddStudent";
 import AddSubject from "./pages/Admin/features/AddSubject";
 import AddDepartment from "./pages/Admin/features/AddDepartment";
 // import CreateNotice from "./pages/Admin/features/CreateNotice";
@@ -51,7 +51,7 @@ function App() {
         }>
           <Route index element={<AdminDashboard />} />
           <Route path="faculty/add" element={<AddFaculty />} />
-          <Route path="student/add" element={<AddStudent />} />
+          {/* <Route path="student/add" element={<AddStudent />} /> */}
           <Route path="subject/add" element={<AddSubject />} />
           <Route path="department/add" element={<AddDepartment />} />
           {/* <Route path="notice/create" element={<CreateNotice />} /> */}

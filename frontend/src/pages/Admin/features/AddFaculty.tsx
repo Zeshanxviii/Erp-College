@@ -55,15 +55,15 @@ export default function AddFaculty() {
 
   return (
     <div className="space-y-6">
-      <div>
-        <h1 className="text-3xl font-bold text-gray-900">Add Faculty Member</h1>
-        <p className="text-gray-600">
-          Add a new faculty member to your institution.
-        </p>
-      </div>
 
       <Card>
         <CardHeader>
+      <div>
+        <h1 className="text-3xl font-bold">Add Faculty Member</h1>
+        <span>
+          Add a new faculty member to your institution.
+        </span>
+      </div>
           <CardTitle className="flex items-center space-x-2">
             <GraduationCap className="h-6 w-6 text-blue-600" />
             <span>Faculty Information</span>

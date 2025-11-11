@@ -52,9 +52,9 @@ app.use('/api/*/login', authLimiter);
 
 // CORS configuration
 const corsOptions = {
-  origin: process.env.NODE_ENV === 'production' 
+  origin: process.env.NODE_ENV === 'production'
     ? process.env.FRONTEND_URL?.split(',') || ['http://localhost:3000']
-    : ['http://localhost:3000', 'http://localhost:3001', 'http://localhost:5173','https://erp-college-psi.vercel.app'],
+    : ['http://localhost:3000', 'http://localhost:3001', 'http://localhost:5173', 'https://erp-college-psi.vercel.app'],
   credentials: true,
   optionsSuccessStatus: 200,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
@@ -119,7 +119,7 @@ app.use(errorLogger);
 // Global error handling middleware
 app.use((error, req, res, next) => {
   console.error("Global error handler:", error);
-  
+
   // Mongoose validation error
   if (error.name === 'ValidationError') {
     const errors = Object.values(error.errors).map(err => ({
@@ -131,7 +131,7 @@ app.use((error, req, res, next) => {
       details: errors
     });
   }
-  
+
   // Mongoose duplicate key error
   if (error.code === 11000) {
     const field = Object.keys(error.keyValue)[0];
@@ -140,20 +140,20 @@ app.use((error, req, res, next) => {
       message: `${field} already exists`
     });
   }
-  
+
   // JWT errors
   if (error.name === 'JsonWebTokenError') {
     return res.status(401).json({
       error: "Invalid token"
     });
   }
-  
+
   if (error.name === 'TokenExpiredError') {
     return res.status(401).json({
       error: "Token expired"
     });
   }
-  
+
   // Default server error
   res.status(500).json({
     error: "Internal server error",
@@ -164,11 +164,11 @@ app.use((error, req, res, next) => {
 const PORT = process.env.PORT || 5001;
 mongoose
   .connect(process.env.CONNECTION_URL)
-  .then(() =>{
+  .then(() => {
     console.log('MongoDB connected successfully')
     addDummyAdmin();
     app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
-  
+
   })
   .catch((error) =>
     console.log("Mongo Error", error.message)

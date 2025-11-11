@@ -1,17 +1,16 @@
 import axios from "axios";
 
 const API = axios.create({
-  baseURL: "https://college-erp-jishans-projects-80682501.vercel.app/",
-  headers: {
-    "Access-Control-Allow-Origin": "*",
-  },
+  baseURL: "http://localhost:5001/",
+  // headers: {
+  //   "Access-Control-Allow-Origin": "*",
+  // },
 });
 
 API.interceptors.request.use((req) => {
   if (localStorage.getItem("user")) {
-    req.headers.Authorization = `Bearer ${
-      JSON.parse(localStorage.getItem("user")).token
-    }`;
+    req.headers.Authorization = `Bearer ${JSON.parse(localStorage.getItem("user")).token
+      }`;
   }
   return req;
 });

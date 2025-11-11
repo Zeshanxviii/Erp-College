@@ -32,6 +32,7 @@ import GetSubjects from "./pages/Admin/features/GetSubjects";
 import StudentSubjects from "./pages/Student/StudentSubjects";
 import StudentResults from "./pages/Student/StudentResults";
 import { useAuthIsAdmin } from "./store/authStore";
+import AddStudent from "./pages/Admin/features/AddStudent";
 function App() {
 
   const IsAdminLogin = useAuthIsAdmin()
@@ -41,16 +42,16 @@ function App() {
       <Navbar />
       <Routes>
         <Route path="/" element={<HomePage />} />
-        
+
         {/* Admin Routes with nested layout */}
         <Route path="/admin" element={
-            !IsAdminLogin ?
+          !IsAdminLogin ?
             <Navigate to="/login" replace /> :
             <AdminLayout />
         }>
           <Route index element={<AdminDashboard />} />
           <Route path="faculty/add" element={<AddFaculty />} />
-          {/* <Route path="student/add" element={<AddStudent />} /> */}
+          <Route path="student/add" element={<AddStudent />} />
           <Route path="subject/add" element={<AddSubject />} />
           <Route path="department/add" element={<AddDepartment />} />
           {/* <Route path="notice/create" element={<CreateNotice />} /> */}
@@ -83,19 +84,19 @@ function App() {
           <Route path="results" element={<StudentResults />} />
         </Route>
 
-        <Route path="/staff-portal" 
+        <Route path="/staff-portal"
           element={
             <ProtectedRoute requiredRole="faculty">
               <StaffPortal />
             </ProtectedRoute>
-          } 
+          }
         />
-        <Route path="/student-portal" 
+        <Route path="/student-portal"
           element={
             <ProtectedRoute requiredRole="student">
               <StudentPortal />
             </ProtectedRoute>
-            } 
+          }
         />
         <Route path="/login" element={<LoginPage />} />
         <Route path="*" element={<Navigate to="/" replace />} />

@@ -1,5 +1,6 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Users, BookOpen, GraduationCap, Building2, TrendingUp, Calendar } from "lucide-react";
+import { motion } from "motion/react";
 
 export default function AdminDashboard() {
   // Mock data - replace with actual data from your API
@@ -101,26 +102,38 @@ export default function AdminDashboard() {
           </CardHeader>
           <CardContent>
             <div className="grid grid-cols-2 gap-3">
-              <button className="p-3 text-left  border border-gray-200 ring rounded-lg hover:bg-background transition-colors">
+              <motion.button
+                whileHover={{ scale: 1.1, transition: { duration: 0.1 } }}
+                transition={{ duration: 0.5 }}
+                className="p-3 text-left hover:bg-background cursor-pointer rounded-lg transition-colors">
                 <Users className="h-5 w-5 text-blue-600 mb-2" />
                 <p className="text-sm font-medium">Add Student</p>
                 <p className="text-xs text-gray-500">Enroll new student</p>
-              </button>
-              <button className="p-3 text-left border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors">
+              </motion.button>
+              <motion.button
+                whileHover={{ scale: 1.1, transition: { duration: 0.1 } }}
+                transition={{ duration: 0.5 }}
+                className="p-3 text-left rounded-lg hover:bg-background cursor-pointer transition-colors">
                 <GraduationCap className="h-5 w-5 text-green-600 mb-2" />
                 <p className="text-sm font-medium">Add Faculty</p>
                 <p className="text-xs text-gray-500">Hire new teacher</p>
-              </button>
-              <button className="p-3 text-left border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors">
+              </motion.button>
+              <motion.button
+                whileHover={{ scale: 1.1, transition: { duration: 0.1 } }}
+                transition={{ duration: 0.5 }}
+                className="p-3 text-left rounded-lg hover:bg-background cursor-pointer transition-colors">
                 <BookOpen className="h-5 w-5 text-purple-600 mb-2" />
                 <p className="text-sm font-medium">Create Course</p>
                 <p className="text-xs text-gray-500">Add new course</p>
-              </button>
-              <button className="p-3 text-left border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors">
+              </motion.button>
+              <motion.button
+                whileHover={{ scale: 1.1, transition: { duration: 0.1 } }}
+                transition={{ duration: 0.5 }}
+                className="p-3 text-left rounded-lg hover:bg-background cursor-pointer transition-colors">
                 <Calendar className="h-5 w-5 text-orange-600 mb-2" />
                 <p className="text-sm font-medium">Schedule</p>
                 <p className="text-xs text-gray-500">Manage timetables</p>
-              </button>
+              </motion.button>
             </div>
           </CardContent>
         </Card>

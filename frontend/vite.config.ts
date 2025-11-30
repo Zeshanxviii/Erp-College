@@ -9,8 +9,8 @@ export default defineConfig({
   server: {
     proxy: {
       '/api': {
-        // target: 'https://erp-server-production-637a.up.railway.app',
-        target: 'http://localhost:5001',
+        target: 'https://erp-server-production-637a.up.railway.app',
+        // target: 'http://localhost:5001',
         changeOrigin: true,
         secure: false,
         rewrite: path => path.replace(/^\/api/, '/api'),

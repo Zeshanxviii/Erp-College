@@ -19,10 +19,16 @@ import {
   Award,
   ChevronRight,
 } from "lucide-react"
-
+import { motion, useScroll } from "motion/react"
+const MotionButton = motion(Button)
 export default function HomePage() {
+  const { scrollYProgress } = useScroll();
   return (
     <div className="min-h-screen bg-background">
+      <motion.div
+        style={{ scaleX: scrollYProgress }}
+        className="fixed top-0 left-0 right-0 h-1 bg-primary origin-left z-50"
+      />
       <section className="py-20 px-4 bg-gradient-to-b from-background to-muted/30">
         <div className="container mx-auto text-center">
           <Badge variant="secondary" className="mb-6 bg-primary text-primary-foreground rounded-full px-4 py-2">
@@ -36,16 +42,22 @@ export default function HomePage() {
             A comprehensive ERP solution designed specifically for administrators, staff, and students to enhance
             academic excellence and streamline institutional operations.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button size="lg" className="text-lg px-8 py-3 font-semibold">
+          <div className="flex flex-col sm:flex-row gap-8 justify-center">
+            <MotionButton
+              whileHover={{ scale: 1.1, transition: { duration: 0.1 } }}
+              transition={{ duration: 0.5 }}
+              size="lg" className="text-lg px-8 py-3 font-semibold">
               Get Started Today
               <ChevronRight className="ml-2 h-5 w-5" />
-            </Button>
-            <Button variant="outline" size="lg" className="text-lg px-8 py-3 text-white font-semibold bg-transparent">
+            </MotionButton>
+            <MotionButton
+              whileHover={{ scale: 1.1, transition: { duration: 0.1 } }}
+              transition={{ duration: 0.5 }}
+              variant="outline" size="lg" className="text-lg px-8 py-3 text-white font-semibold bg-transparent">
               Schedule Demo
-            </Button>
+            </MotionButton>
           </div>
-          
+
           {/* Temporary Auth Debugger - Remove in production */}
           <div className="mt-8 flex justify-center">
             {/* <AuthDebugger /> */}
